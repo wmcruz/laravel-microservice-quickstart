@@ -15,4 +15,5 @@ class Category extends Model
         'id' => 'string',
         'is_active' => 'boolean'
     ];
+    public $incrementing = false;
 }
