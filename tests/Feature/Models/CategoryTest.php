@@ -46,6 +46,7 @@ class CategoryTest extends TestCase
         $this->assertEquals('test1', $category->name);
         $this->assertNull($category->description);
         $this->assertTrue($category->is_active);
+        $this->assertRegExp('/^\w{8}\-\w{4}\-\w{4}\-\w{4}\-\w{12}$/',$category->id);
 
         $category = Category::create([
             'name' => 'test1',
