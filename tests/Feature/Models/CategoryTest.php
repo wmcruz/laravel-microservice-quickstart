@@ -80,4 +80,22 @@ class CategoryTest extends TestCase
             $this->assertEquals($value, $category->{$key});
         }
     }
+
+    public function testDelete() {
+        $category = factory(Category::class)->create([
+            'description' => 'test_description',
+            'is_active' => false
+        ]);
+        $category->delete();
+
+        $category_after_delete = Category::find($category->id);
+        $category_trash = Category::withTrashed()->find($category->id);
+        
+        $this->assertNull($category_after_delete);
+        $this->assertNotNull($category_trash); 
+        
+        $category_trash->forceDelete();
+        $category_after_force_delete = Category::withoutTrashed()->find($category->id);
+        $this->assertNull($category_after_force_delete);
+    }
 }
