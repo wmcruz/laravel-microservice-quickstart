@@ -10,5 +10,5 @@ steps:
 
 - id: "Rodando composer do PHP"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t', 'workspace_app', 'composer', 'install']
+  args: ['exec', '-t', 'micro-videos-app', 'composer', 'install']
 
