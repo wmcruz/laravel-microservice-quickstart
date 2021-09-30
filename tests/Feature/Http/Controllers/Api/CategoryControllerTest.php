@@ -129,6 +129,30 @@ class CategoryControllerTest extends TestCase
                 'description' => null
             ]);
     }
+    
+    /** Teste para deletar uma categoria */
+    public function testDelete() {
+        // Teste para deletar categoria inexistente.
+        $response = $this->json(
+            'DELETE',
+            route('categories.destroy', ['category' => 100]));
+
+        $response
+            ->assertStatus(404);
+        
+        // Criando e deletando uma categoria
+        $category = factory(Category::class)->create([
+            'description' => 'Teste de descrição',
+            'is_active' => false
+        ]);
+
+        $response = $this->json(
+            'DELETE',
+            route('categories.destroy', ['category' => $category->id]));
+
+        $response
+            ->assertStatus(204);
+    }
 
     protected function assertInvalidationRequired(TestResponse $response){
         $response
