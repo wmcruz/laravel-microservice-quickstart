@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\TestResponse;
 use Tests\TestCase;
 
+/** Teste de Integração HTTP */
 class CategoryControllerTest extends TestCase
 {
     use DatabaseMigrations;
