@@ -26,7 +26,7 @@ steps:
 
 - id: "Rodando migrations"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec','-t','app','php','/var/www/artisan','migrate']
+  args: ['exec', '-t', 'micro-videos-app', 'php', '/var/www/artisan', 'migrate']
 
 - id: "Rodando phpunit"
   name: 'gcr.io/cloud-builders/docker'
