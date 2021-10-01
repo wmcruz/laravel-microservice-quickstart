@@ -21,13 +21,11 @@ class CategoryControllerTest extends TestCase
     
     /** Cria e realiza uma listagem de categorias */
     public function testIndex() {
-        $category = factory(Category::class)->create();
-
         $response = $this->get(route('categories.index'));
 
         $response
             ->assertStatus(200)
-            ->assertJson([$category->toArray()]);
+            ->assertJson([$this->category->toArray()]);
     }
 
     /** Cria e pesquisa uma categoria */
