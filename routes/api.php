@@ -18,6 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api'], function () {
-    Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit']]);
-    Route::resource('genres', 'GenreController', ['except' => ['create', 'edit']]);
+    $exceptCreateAndExist = ['except' => ['create', 'edit']];
+
+    Route::resource('categories', 'CategoryController', $exceptCreateAndExist);
+    Route::resource('genres', 'GenreController', $exceptCreateAndExist);
+    Route::resource('cast_members', 'CastMemberController', $exceptCreateAndExist);
 });
