@@ -18,7 +18,7 @@ class CategoryControllerTest extends TestCase
         parent::setUp();
         $this->category = factory(Category::class)->create();
     }
-    
+
     /** Cria e realiza uma listagem de categorias */
     public function testIndex() {
         $response = $this->get(route('categories.index'));
@@ -30,15 +30,13 @@ class CategoryControllerTest extends TestCase
 
     /** Cria e pesquisa uma categoria */
     public function testShow() {
-        $category = factory(Category::class)->create();
-
-        $response = $this->get(route('categories.show', ['category' => $category->id]));
+        $response = $this->get(route('categories.show', ['category' => $this->category->id]));
 
         $response
             ->assertStatus(200)
-            ->assertJson($category->toArray());
+            ->assertJson($this->category->toArray());
     }
-    
+
     /** Teste de Validação de dados de categoria */
     public function testInvalidationData() {
         $data = ['name' => ''];
@@ -100,12 +98,12 @@ class CategoryControllerTest extends TestCase
         $data['description'] = null;
         $this->assertUpdate($data, array_merge($data, ['description' => null]));
     }
-    
+
     /** Teste para deletar uma categoria */
     public function testDelete() {
         $response = $this->json('DELETE', route('categories.destroy', ['category' => 100]));
         $response->assertStatus(404);
-        
+
         $response = $this->json('DELETE', route('categories.destroy', ['category' => $this->category->id]));
         $response->assertStatus(204);
     }
