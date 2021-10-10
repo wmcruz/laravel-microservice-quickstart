@@ -3,15 +3,12 @@
 namespace Tests\Unit;
 
 use App\Models\Category;
-use App\Models\Genre;
 use App\Models\Traits\Uuid;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use PHPUnit\Framework\TestCase;
 
 /** Testes de Unidade */
-class CategoryTest extends TestCase
-{
+class CategoryUnitTest extends TestCase {
     private $category;
 
     protected function setUp(): void
