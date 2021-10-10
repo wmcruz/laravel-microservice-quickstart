@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CastMember whereUpdatedAt($value)
  */
 class CastMember extends Model {
-    use Uuid, SoftDeletes;
+    use SoftDeletes, Uuid;
 
     const TYPE_DIRECTOR = 1;
     const TYPE_ACTOR = 2;
@@ -40,7 +40,8 @@ class CastMember extends Model {
     protected $fillable = ['name', 'type'];
     protected $dates = ['deleted_at'];
     protected $casts = [
-        'id' => 'string'
+        'id' => 'string',
+        'type' => 'integer'
     ];
     public $incrementing = false;
 }
