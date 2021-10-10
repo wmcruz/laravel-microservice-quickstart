@@ -4,8 +4,6 @@ namespace Tests\Feature\Models;
 
 use App\Models\Genre;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 /** Teste de Integração com BD */
@@ -91,10 +89,10 @@ class GenreTest extends TestCase
 
         $genre_after_delete = Genre::find($genre->id);
         $genre_trash = Genre::withTrashed()->find($genre->id);
-        
+
         $this->assertNull($genre_after_delete);
-        $this->assertNotNull($genre_trash); 
-        
+        $this->assertNotNull($genre_trash);
+
         $genre_trash->forceDelete();
         $genre_after_force_delete = Genre::withoutTrashed()->find($genre->id);
         $this->assertNull($genre_after_force_delete);

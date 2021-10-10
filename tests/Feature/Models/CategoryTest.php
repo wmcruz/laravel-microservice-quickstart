@@ -4,8 +4,6 @@ namespace Tests\Feature\Models;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 /** Teste de Integração com BD */
@@ -92,10 +90,10 @@ class CategoryTest extends TestCase
 
         $category_after_delete = Category::find($category->id);
         $category_trash = Category::withTrashed()->find($category->id);
-        
+
         $this->assertNull($category_after_delete);
-        $this->assertNotNull($category_trash); 
-        
+        $this->assertNotNull($category_trash);
+
         $category_trash->forceDelete();
         $category_after_force_delete = Category::withoutTrashed()->find($category->id);
         $this->assertNull($category_after_force_delete);
