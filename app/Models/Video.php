@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Traits\Uuid;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * App\Models\Video
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video query()
+ * @mixin \Eloquent
+ */
+class Video extends Model {
+    use SoftDeletes, Uuid;
+
+    const RATING_LIST = ['L', '10', '12', '14', '16', '18'];
+
+    protected $fillable = [
+      'title',
+      'description',
+      'year_launched',
+      'opened',
+      'rating',
+      'duration'
+    ];
+
+    protected $dates = ['deleted_at'];
+    protected $casts = [
+        'id' => 'string',
+        'opened' => 'boolean',
+        'year_launched' => 'integer',
+        'duration' => 'integer'
+    ];
+
+    public $incrementing = false;
+}
