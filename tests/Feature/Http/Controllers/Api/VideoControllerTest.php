@@ -41,7 +41,9 @@ class VideoControllerTest extends TestCase {
             'description' => '',
             'year_launched' => '',
             'rating' => '',
-            'duration' => ''
+            'duration' => '',
+            'categories_id' => '',
+            'genres_id' => ''
         ];
 
         $this->assertInvalidationInStoreAction($data, 'required');
@@ -83,6 +85,30 @@ class VideoControllerTest extends TestCase {
         $this->assertInvalidationInUpdateAction($data, 'in');
     }
 
+    public function testInvalidationDataCategoriesIdField() {
+        $data = ['categories_id' => 'a'];
+
+        $this->assertInvalidationInStoreAction($data, 'array');
+        $this->assertInvalidationInUpdateAction($data, 'array');
+
+        $data = ['categories_id' => [100]];
+
+        $this->assertInvalidationInStoreAction($data, 'exists');
+        $this->assertInvalidationInUpdateAction($data, 'exists');
+    }
+
+    public function testInvalidationDataGenresIdField() {
+        $data = ['genres_id' => 'a'];
+
+        $this->assertInvalidationInStoreAction($data, 'array');
+        $this->assertInvalidationInUpdateAction($data, 'array');
+
+        $data = ['genres_id' => [100]];
+
+        $this->assertInvalidationInStoreAction($data, 'exists');
+        $this->assertInvalidationInUpdateAction($data, 'exists');
+    }
+
     public function testShowVideos() {
         $response = $this->get(route('videos.show', ['video' => $this->video->id]));
 
@@ -91,7 +117,7 @@ class VideoControllerTest extends TestCase {
             ->assertJson($this->video->toArray());
     }
 
-    public function testSave() {
+    /*public function testSaveVideos() {
         $data = [
             [
                 'send_data' => $this->sendaDate,
@@ -117,9 +143,9 @@ class VideoControllerTest extends TestCase {
                 $value['test_data'] + ['deleted_at' => null]);
             $response->assertJsonStructure(['created_at', 'updated_at']);
         }
-    }
+    }*/
 
-    public function testDelete() {
+    public function testDeleteVideos() {
         $response = $this->json('DELETE', route('videos.destroy', ['video' => 100]));
         $response->assertStatus(404);
 
