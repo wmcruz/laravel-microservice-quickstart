@@ -13,6 +13,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video query()
  * @mixin \Eloquent
+ * @property string $id
+ * @property string $title
+ * @property string $description
+ * @property int $year_launched
+ * @property bool $opened
+ * @property string $rating
+ * @property int $duration
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Video onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereOpened($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Video whereYearLaunched($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Video withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Video withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Genre[] $genres
+ * @property-read int|null $genres_count
  */
 class Video extends Model {
     use SoftDeletes, Uuid;
@@ -37,4 +66,12 @@ class Video extends Model {
     ];
 
     public $incrementing = false;
+
+    public function categories() {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function genres() {
+        return $this->belongsToMany(Genre::class);
+    }
 }
